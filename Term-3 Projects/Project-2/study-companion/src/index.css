@@ -1,12 +1,12 @@
 :root {
   /* Colors */
-  --primary: #4a90e2;
-  --primary-hover: #357abd;
-  --bg-color: #f5f7fa;
-  --card-bg: #ffffff;
-  --text-main: #333333;
-  --text-muted: #666666;
-  --border-color: #e1e4e8;
+  --primary: #5c9ce6;
+  --primary-hover: #4a90e2;
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --border-color: #333333;
 
   /* Status Colors */
   --status-pending: #f39c12;

@@ -90,7 +90,7 @@
 }
 
 .btn-icon:hover {
-  background-color: #f0f0f0;
+  background-color: #333333;
 }
 
 .btn-delete:hover {
@@ -200,7 +200,7 @@
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--primary);
-  background: #eef5fc;
+  background: #2c3e50;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
 }
@@ -231,7 +231,7 @@
   font-size: 0.75rem;
   padding: 0.2rem 0.5rem;
   border-radius: 12px;
-  background: #eee;
+  background: #333333;
   margin-left: 0.5rem;
 }
 
@@ -287,18 +287,18 @@
 }
 
 .priority-high {
-  background: #fee2e2;
-  color: #991b1b;
+  background: #5c1818;
+  color: #fca5a5;
 }
 
 .priority-medium {
-  background: #fef3c7;
-  color: #92400e;
+  background: #6b3506;
+  color: #fcd34d;
 }
 
 .priority-low {
-  background: #d1fae5;
-  color: #065f46;
+  background: #023828;
+  color: #6ee7b7;
 }
 
 .task-status {
@@ -385,7 +385,7 @@
 
 .tab-btn.active {
   color: var(--primary);
-  background: #eef5fc;
+  background: #2c3e50;
   border-radius: 20px;
 }
 
@@ -412,7 +412,7 @@
 }
 
 .revision-date {
-  background-color: #fce7f3 !important;
+  background-color: #521b33 !important;
   color: var(--status-revision) !important;
   font-weight: bold;
 }
@@ -478,7 +478,7 @@
   white-space: pre-wrap;
   font-family: inherit;
   color: var(--text-muted);
-  background: #f8f9fa;
+  background: #2c2c2c;
   padding: 1rem;
   border-radius: 4px;
   margin-top: 1rem;
