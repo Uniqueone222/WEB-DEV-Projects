@@ -1,8 +1,14 @@
 import { FaTrash, FaCheck, FaClock } from 'react-icons/fa'
 import { formatDate, isOverdue } from '../utils/helpers'
+import { useContext } from 'react'
+import { StudyContext } from '../context/StudyContext'
 
 function TaskCard({ task, onToggle, onDelete, onMarkRevision }) {
     const overdue = isOverdue(task.deadline) && task.status !== 'Completed'
+    const { subjects, topics } = useContext(StudyContext)
+
+    const subjectName = subjects.find(s => s.id === task.subject)?.name || 'Unknown'
+    const topicName =  topics.find(t => t.id === task.topic)?.name || ''
 
     return (
         <div className={`task-card ${overdue ? 'overdue' : ''} ${task.status === 'Completed' ? 'completed' : ''}`}>
@@ -14,8 +20,8 @@ function TaskCard({ task, onToggle, onDelete, onMarkRevision }) {
             </div>
 
             <div className="task-details">
-                <span>📘 {task.subject}</span>
-                {task.topic && <span>📝 {task.topic}</span>}
+                <span>📘 {subjectName}</span>
+                {task.topic && <span>📝 {topicName}</span>}
                 <span>📅 {formatDate(task.deadline)}</span>
             </div>
 

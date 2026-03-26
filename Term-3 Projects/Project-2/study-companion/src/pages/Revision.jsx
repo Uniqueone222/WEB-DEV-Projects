@@ -6,14 +6,18 @@ import { StudyContext } from '../context/StudyContext'
 import RevisionList from '../components/RevisionList'
 import { generateId, formatDate } from '../utils/helpers'
 import useSubjects from '../hooks/useSubjects'
+import useTasks from '../hooks/useTasks'
 
 function Revision() {
     const { topics, subjects, revisionSchedule, setRevisionSchedule } = useContext(StudyContext)
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [selectedSubject, setSelectedSubject] = useState('')
     const [selectedTopic, setSelectedTopic] = useState('')
+    const [selectedPriority, setSelectedPriority] = useState('')
+    const [title, setTitle] = useState('');
     const { getTopicsBySubject} = useSubjects()
     const filteredTopics = selectedSubject ? getTopicsBySubject(selectedSubject) : []
+    const {addTask} = useTasks();
 
     // add a revision entry
     function addRevision() {
@@ -29,10 +33,19 @@ function Revision() {
 
         const newRevision = {
             id: generateId(),
-            topicId: selectedTopic,
-            date: selectedDate.toLocaleDateString().split('T')[0]
+            topic: selectedTopic,
+            date: selectedDate.toLocaleDateString()
         }
 
+        const newTaskData = {
+            title: title,
+            topic: selectedTopic,
+            subject: selectedSubject,
+            deadline: selectedDate.toLocaleDateString(),
+            priority: selectedPriority,
+            status: "Revision"
+        }
+        addTask(newTaskData)
         setRevisionSchedule([...revisionSchedule, newRevision])
         setSelectedTopic('')
         toast.success('Revision scheduled!')
@@ -71,6 +84,15 @@ function Revision() {
                     <div className="form-card revision-form">
                         <h4>Schedule Revision for {formatDate(selectedDate)}</h4>
                         
+                        {/*Input for Task Title */}
+                        <input
+                            value={title}
+                            onChange={(e) =>{
+                                setTitle(e.target.value);
+                            }}
+                            placeholder='Enter a Title'
+                        />
+
                         {/*Drop down for Subjects */}
                         <select
                             value={selectedSubject}
@@ -97,6 +119,17 @@ function Revision() {
                                 <option key={t.id} value={t.id}>{t.name}</option>
                             ))}
 
+                        </select>
+                        
+                        {/*Drop Down for Priority*/}
+                        <select
+                            value={selectedPriority}
+                            onChange={(e) => setSelectedPriority(e.target.value)}
+                        >
+                            <option value="">Select Priority</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
                         </select>
 
                         <button className="btn-primary" onClick={addRevision}>Schedule</button>

@@ -14,7 +14,7 @@ function useTasks() {
             topic: taskData.topic,
             deadline: taskData.deadline,
             priority: taskData.priority || 'Medium',
-            status: 'Pending'
+            status: taskData.status === 'Revision' ? 'Revision' : 'Pending'
         }
         setTasks([...tasks, newTask])
     }

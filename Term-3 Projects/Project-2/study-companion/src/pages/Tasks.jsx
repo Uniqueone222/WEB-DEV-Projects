@@ -15,17 +15,19 @@ const taskSchema = yup.object({
     subject: yup.string().required('Subject is required'),
     topic: yup.string(),
     deadline: yup.string().required('Deadline is required'),
-    priority: yup.string()
+    priority: yup.string(),
+    status: yup.string()
 })
 
 function Tasks() {
-    const { subjects } = useContext(StudyContext)
+    const { subjects, topics } = useContext(StudyContext)
     const { tasks, addTask, deleteTask, toggleComplete, markRevision } = useTasks()
 
     const [activeTab, setActiveTab] = useState('All')
     const [searchQuery, setSearchQuery] = useState('')
     const [filterSubject, setFilterSubject] = useState('')
     const [filterPriority, setFilterPriority] = useState('')
+    const [selectedSubject, setSelectedSubject] = useState('')
     const [sortBy, setSortBy] = useState('deadline')
     const [showForm, setShowForm] = useState(false)
 
@@ -74,12 +76,18 @@ function Tasks() {
 
     // search filter
     if (searchQuery) {
-        const q = searchQuery.toLowerCase()
-        filteredTasks = filteredTasks.filter(t =>
-            t.title.toLowerCase().includes(q) ||
-            t.subject.toLowerCase().includes(q) ||
-            (t.topic && t.topic.toLowerCase().includes(q))
-        )
+      const q = searchQuery.toLowerCase();
+      filteredTasks = filteredTasks.filter((t) => {
+        const subjectName =
+          subjects.find((s) => s.id === t.subject)?.name || "";
+        const topicName = topics.find((tp) => tp.id === t.topic)?.name || "";
+
+        return (
+          t.title.toLowerCase().includes(q) ||
+          subjectName.toLowerCase().includes(q) ||
+          topicName.toLowerCase().includes(q)
+        );
+      });
     }
 
     // subject filter
@@ -99,11 +107,20 @@ function Tasks() {
             const order = { High: 1, Medium: 2, Low: 3 }
             return order[a.priority] - order[b.priority]
         }
-        if (sortBy === 'subject') return a.subject.localeCompare(b.subject)
+        if (sortBy === 'subject') {
+            const subjectA = subjects.find(s => s.id === a.subject)
+            const subjectB = subjects.find(s => s.id === b.subject)
+
+            const nameA = subjectA ? subjectA.name : ''
+            const nameB = subjectB ? subjectB.name : ''
+
+            return nameA.localeCompare(nameB)
+        }
         return 0
     })
 
     const tabs = ['All', 'Pending', 'Completed', 'Overdue', 'Revision']
+    const filteredTopics = selectedSubject ? topics.filter(t => t.subjectId === selectedSubject): []
 
     return (
         <div className="page tasks-page">
@@ -120,15 +137,22 @@ function Tasks() {
                     <input type="text" placeholder="Task Title" {...register('title')} />
                     {errors.title && <span className="error">{errors.title.message}</span>}
 
-                    <select {...register('subject')}>
+                    {/*Drop Down for Subjects */}
+                    <select {...register('subject')} onChange={(e) => setSelectedSubject(e.target.value)}>
                         <option value="">Select Subject</option>
                         {subjects.map(s => (
-                            <option key={s.id} value={s.name}>{s.name}</option>
+                            <option key={s.id} value={s.id}>{s.name}</option>
                         ))}
                     </select>
                     {errors.subject && <span className="error">{errors.subject.message}</span>}
-
-                    <input type="text" placeholder="Topic (optional)" {...register('topic')} />
+                    
+                    {/*Drop down for Topics */}
+                    <select {...register('topic')} disabled={!selectedSubject}>
+                        <option value="">Select Topic</option>
+                        {filteredTopics.map(t => (
+                            <option key={t.id} value={t.id}>{t.name}</option>
+                        ))}
+                    </select>
 
                     <input type="date" {...register('deadline')} />
                     {errors.deadline && <span className="error">{errors.deadline.message}</span>}
@@ -163,7 +187,7 @@ function Tasks() {
                 <select value={filterSubject} onChange={(e) => setFilterSubject(e.target.value)}>
                     <option value="">All Subjects</option>
                     {subjects.map(s => (
-                        <option key={s.id} value={s.name}>{s.name}</option>
+                        <option key={s.id} value={s.id}>{s.name}</option>
                     ))}
                 </select>
 
