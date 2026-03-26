@@ -30,7 +30,7 @@ function Revision() {
         const newRevision = {
             id: generateId(),
             topicId: selectedTopic,
-            date: selectedDate.toISOString().split('T')[0]
+            date: selectedDate.toLocaleDateString().split('T')[0]
         }
 
         setRevisionSchedule([...revisionSchedule, newRevision])
@@ -46,7 +46,7 @@ function Revision() {
 
     // highlight dates that have revisions on the calendar
     function tileClassName({ date }) {
-        const dateStr = date.toISOString().split('T')[0]
+        const dateStr = date.toLocaleDateString().split('T')[0]
         const hasRevision = revisionSchedule.some(r => r.date === dateStr)
         return hasRevision ? 'revision-date' : null
     }
@@ -124,7 +124,7 @@ function Revision() {
                                 )
 
                             })}
-                            
+
                         </div>
                     ) : (
                         <p className="no-data">No revisions scheduled yet</p>
