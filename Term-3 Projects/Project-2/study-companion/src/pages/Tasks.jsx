@@ -20,7 +20,7 @@ const taskSchema = yup.object({
 
 function Tasks() {
     const { subjects } = useContext(StudyContext)
-    const { tasks, addTask, deleteTask, toggleComplete } = useTasks()
+    const { tasks, addTask, deleteTask, toggleComplete, markRevision } = useTasks()
 
     const [activeTab, setActiveTab] = useState('All')
     const [searchQuery, setSearchQuery] = useState('')
@@ -48,6 +48,16 @@ function Tasks() {
     function onToggle(id) {
         toggleComplete(id)
         toast.success('Task updated!')
+    }
+
+    function onMarkRevision(id) {
+        const result = markRevision(id)
+
+        if (result?.error) {
+            toast.error(result.error)
+        } else {
+            toast.success('Marked for revision!')
+        }
     }
 
     // filter by tab
@@ -179,6 +189,7 @@ function Tasks() {
                         task={task}
                         onToggle={onToggle}
                         onDelete={onDelete}
+                        onMarkRevision={onMarkRevision}
                     />
                 ))}
                 {filteredTasks.length === 0 && <p className="no-data">No tasks found</p>}

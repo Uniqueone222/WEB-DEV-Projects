@@ -3,11 +3,18 @@ import { StudyContext } from '../context/StudyContext'
 import useProgress from '../hooks/useProgress'
 import ProgressChart from '../components/ProgressChart'
 import RevisionList from '../components/RevisionList'
+import { toast } from 'react-toastify'
 
 function Dashboard() {
-    const { topics, revisionSchedule } = useContext(StudyContext)
+    const { topics, revisionSchedule, setRevisionSchedule } = useContext(StudyContext)
     const { totalTasks, completed, pending, revision, overdue, completionPercent, subjectProgress } = useProgress()
 
+    // delete a revision
+    function deleteRevision(id) {
+        setRevisionSchedule(revisionSchedule.filter(r => r.id !== id))
+        toast.info('Revision removed')
+    }
+    
     // get upcoming revisions (sorted by date)
     const upcomingRevisions = [...revisionSchedule]
         .sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -46,13 +53,14 @@ function Dashboard() {
                 completionPercent={completionPercent}
                 completed={completed}
                 pending={pending}
+                revision={revision}
                 subjectProgress={subjectProgress}
             />
 
             {/* Upcoming Revisions */}
             <div className="section">
                 <h3>📅 Upcoming Revisions</h3>
-                <RevisionList revisions={upcomingRevisions} topics={topics} />
+                <RevisionList revisions={upcomingRevisions} topics={topics} onDelete={deleteRevision}/>
             </div>
         </div>
     )

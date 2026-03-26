@@ -1,7 +1,7 @@
-import { FaTrash, FaCheck } from 'react-icons/fa'
+import { FaTrash, FaCheck, FaClock } from 'react-icons/fa'
 import { formatDate, isOverdue } from '../utils/helpers'
 
-function TaskCard({ task, onToggle, onDelete }) {
+function TaskCard({ task, onToggle, onDelete, onMarkRevision }) {
     const overdue = isOverdue(task.deadline) && task.status !== 'Completed'
 
     return (
@@ -29,6 +29,9 @@ function TaskCard({ task, onToggle, onDelete }) {
             <div className="task-actions">
                 <button className="btn-icon btn-complete" onClick={() => onToggle(task.id)}>
                     <FaCheck />
+                </button>
+                <button className="btn-icon btn-revision" onClick={() => onMarkRevision(task.id)} title="Mark for revision">
+                    <FaClock />
                 </button>
                 <button className="btn-icon btn-delete" onClick={() => onDelete(task.id)}>
                     <FaTrash />

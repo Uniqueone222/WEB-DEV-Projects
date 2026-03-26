@@ -1,13 +1,14 @@
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
-function ProgressChart({ completionPercent, completed, pending, subjectProgress }) {
+function ProgressChart({ completionPercent, completed, pending, revision, subjectProgress }) {
 
     // data for the pie chart
     const pieData = [
         { name: 'Completed', value: completed },
-        { name: 'Pending', value: pending }
+        { name: 'Pending', value: pending },
+        { name: 'Revision', value: revision }
     ]
-    const pieColors = ['#4caf50', '#ff9800']
+    const pieColors = ['#4caf50', '#ff9800', '#325ca1']
 
     return (
         <div className="charts-container">

@@ -1,6 +1,6 @@
 import { formatDate } from '../utils/helpers'
 
-function RevisionList({ revisions, topics }) {
+function RevisionList({ revisions, topics, onDelete }) {
 
     // match revision to its topic name
     function getTopicName(topicId) {
@@ -18,6 +18,7 @@ function RevisionList({ revisions, topics }) {
                 <div key={rev.id} className="revision-item">
                     <span className="revision-topic">{getTopicName(rev.topicId)}</span>
                     <span className="revision-date">📅 {formatDate(rev.date)}</span>
+                    <button className="btn-icon btn-delete" onClick={() => onDelete(rev.id)}>🗑️</button>
                 </div>
             ))}
         </div>

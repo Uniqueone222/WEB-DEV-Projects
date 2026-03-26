@@ -108,24 +108,11 @@ function Revision() {
                 <div className="revision-list-section">
                     <h3>All Scheduled Revisions</h3>
                     {sortedRevisions.length > 0 ? (
-                        <div className="revision-list">
-                            {sortedRevisions.map(rev => {
-
-                                const topic = topics.find(t => t.id === rev.topicId)
-
-                                return (
-                                    <div key={rev.id} className="revision-item">
-                                        <div>
-                                            <span className="revision-topic">{topic ? topic.name : 'Unknown'}</span>
-                                            <span className="revision-date">📅 {formatDate(rev.date)}</span>
-                                        </div>
-                                        <button className="btn-icon btn-delete" onClick={() => deleteRevision(rev.id)}>🗑️</button>
-                                    </div>
-                                )
-
-                            })}
-
-                        </div>
+                        <RevisionList
+                            revisions={sortedRevisions}
+                            topics={topics}
+                            onDelete={deleteRevision}
+                        />
                     ) : (
                         <p className="no-data">No revisions scheduled yet</p>
                     )}

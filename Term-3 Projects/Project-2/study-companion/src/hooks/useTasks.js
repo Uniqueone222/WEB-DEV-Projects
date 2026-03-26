@@ -29,6 +29,24 @@ function useTasks() {
         }))
     }
 
+    // mark a task as revision
+    function markRevision(id) {
+        const task = tasks.find(t => t.id === id)
+    
+        if (!task) {
+            return { error: 'Task not found' }
+        }
+
+        if (task.status !== 'Completed') {
+            return { error: 'Complete the task before adding to revision' }
+        }
+        
+        setTasks(tasks.map(t =>
+            t.id === id ? { ...t, status: 'Revision' } : t
+        ))
+    }
+    
+
     // delete a task by id
     function deleteTask(id) {
         setTasks(tasks.filter(task => task.id !== id))
@@ -47,7 +65,7 @@ function useTasks() {
         }))
     }
 
-    return { tasks, addTask, updateTask, deleteTask, toggleComplete }
+    return { tasks, addTask, updateTask, deleteTask, toggleComplete, markRevision }
 }
 
 export default useTasks
