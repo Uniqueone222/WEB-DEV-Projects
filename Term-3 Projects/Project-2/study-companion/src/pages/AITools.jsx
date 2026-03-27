@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { generateSummary, generateQuestions, generateFlashcards } from '../services/aiService'
+import ReactMarkdown from 'react-markdown'
 import { 
 FaRobot, FaFileAlt, FaQuestionCircle, FaLayerGroup} from "react-icons/fa";
 
@@ -74,7 +75,9 @@ function AITools() {
             {result && (
                 <div className="ai-result">
                     <h3>Result</h3>
-                    <pre className="ai-output">{result}</pre>
+                    <div className="ai-output">
+                        <ReactMarkdown>{result}</ReactMarkdown>
+                    </div>
                 </div>
             )}
         </div>

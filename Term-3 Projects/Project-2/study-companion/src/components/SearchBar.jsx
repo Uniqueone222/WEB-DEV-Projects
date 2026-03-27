@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import useDebounce from '../hooks/useDebounce'
 
@@ -7,9 +7,9 @@ function SearchBar({ onSearch }) {
     const debouncedQuery = useDebounce(query, 400)
 
     // send debounced value to parent whenever it changes
-    useState(() => {
+    useEffect(() => {
         onSearch(debouncedQuery)
-    }, [debouncedQuery])
+    }, [debouncedQuery, onSearch])
 
     return (
         <div className="search-bar">
@@ -20,7 +20,6 @@ function SearchBar({ onSearch }) {
                 value={query}
                 onChange={(e) => {
                     setQuery(e.target.value)
-                    onSearch(e.target.value)
                 }}
             />
         </div>

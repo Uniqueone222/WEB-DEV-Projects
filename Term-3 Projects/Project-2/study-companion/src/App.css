@@ -478,13 +478,55 @@
 }
 
 .ai-output {
-  white-space: pre-wrap;
-  font-family: inherit;
+  line-height: 1.6;
   color: var(--text-muted);
   background: #2c2c2c;
   padding: 1rem;
   border-radius: 4px;
   margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.ai-output p,
+.ai-output ul,
+.ai-output ol {
+  margin: 0 0 0.75rem;
+}
+
+.ai-output ul,
+.ai-output ol {
+  padding-left: 1.25rem;
+}
+
+.ai-output li {
+  margin-bottom: 0.25rem;
+}
+
+.ai-output h1,
+.ai-output h2,
+.ai-output h3,
+.ai-output h4 {
+  margin: 0.5rem 0 0.75rem;
+}
+
+.ai-output code {
+  background: #252525;
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+  font-family: Consolas, "Courier New", monospace;
+  color: #d6e9ff;
+}
+
+.ai-output pre {
+  background: #252525;
+  border-radius: 6px;
+  padding: 0.75rem;
+  overflow-x: auto;
+}
+
+.ai-output pre code {
+  padding: 0;
+  background: transparent;
 }
 
 /* Spinner */
