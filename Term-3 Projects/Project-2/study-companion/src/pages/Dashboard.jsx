@@ -4,6 +4,7 @@ import useProgress from '../hooks/useProgress'
 import ProgressChart from '../components/ProgressChart'
 import RevisionList from '../components/RevisionList'
 import { toast } from 'react-toastify'
+import { FaChartBar, FaCalendar } from 'react-icons/fa'
 
 function Dashboard() {
     const { topics, revisionSchedule, setRevisionSchedule, tasks, setTasks } = useContext(StudyContext)
@@ -27,7 +28,7 @@ function Dashboard() {
 
     return (
         <div className="page dashboard-page">
-            <h2>📊 Dashboard</h2>
+            <h2><FaChartBar/> Dashboard</h2>
 
             {/* Stats Cards */}
             <div className="stats-grid">
@@ -64,7 +65,7 @@ function Dashboard() {
 
             {/* Upcoming Revisions */}
             <div className="section">
-                <h3>📅 Upcoming Revisions</h3>
+                <h3><FaCalendar/> Upcoming Revisions</h3>
                 <RevisionList revisions={upcomingRevisions} topics={topics} onDelete={deleteRevision}/>
             </div>
         </div>

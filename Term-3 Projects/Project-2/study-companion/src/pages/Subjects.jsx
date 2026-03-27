@@ -5,6 +5,7 @@ import * as yup from 'yup'
 import { toast } from 'react-toastify'
 import useSubjects from '../hooks/useSubjects'
 import SubjectCard from '../components/SubjectCard'
+import { FaBook } from 'react-icons/fa'
 
 // form validation
 const subjectSchema = yup.object({
@@ -63,7 +64,7 @@ function Subjects() {
     return (
         <div className="page subjects-page">
             <div className="page-header">
-                <h2>📘 Subjects</h2>
+                <h2><FaBook/> Subjects</h2>
                 <button className="btn-primary" onClick={() => setShowSubjectForm(!showSubjectForm)}>
                     {showSubjectForm ? 'Cancel' : '+ Add Subject'}
                 </button>

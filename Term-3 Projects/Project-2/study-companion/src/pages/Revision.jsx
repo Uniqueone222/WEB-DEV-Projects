@@ -7,7 +7,7 @@ import RevisionList from '../components/RevisionList'
 import { generateId, formatDate } from '../utils/helpers'
 import useSubjects from '../hooks/useSubjects'
 import useTasks from '../hooks/useTasks'
-
+import { FaSync } from 'react-icons/fa'
 function Revision() {
     const { topics, subjects, revisionSchedule, setRevisionSchedule, tasks, setTasks } = useContext(StudyContext)
     const [selectedDate, setSelectedDate] = useState(new Date())
@@ -74,7 +74,7 @@ function Revision() {
     
     return (
         <div className="page revision-page">
-            <h2>🔄 Revision Planner</h2>
+            <h2><FaSync/> Revision Planner</h2>
 
             <div className="revision-layout">
                 {/* Calendar */}

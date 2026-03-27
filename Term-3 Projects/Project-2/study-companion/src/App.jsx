@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
-
+import { FaBookOpen } from 'react-icons/fa'
 import { StudyProvider } from './context/StudyContext'
 
 import Dashboard from './pages/Dashboard'
@@ -16,7 +16,7 @@ function App() {
     <StudyProvider>
       <BrowserRouter>
         <nav className="navbar">
-          <span className="nav-brand">📚 Study Companion</span>
+          <span className="nav-brand"><FaBookOpen/> Study Companion</span>
           <div className="nav-links">
             <NavLink to="/dashboard">Dashboard</NavLink>
             <NavLink to="/subjects">Subjects</NavLink>

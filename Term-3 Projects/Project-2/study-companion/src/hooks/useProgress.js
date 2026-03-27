@@ -17,7 +17,7 @@ function useProgress() {
         : 0
 
     // progress per subject for the bar chart
-    const subjectProgress = subjects.map(sub => {
+    const subjectProgress = [...subjects.map(sub => {
         const subjectTasks = tasks.filter(t => t.subject === sub.id)
         const subjectCompleted = subjectTasks.filter(t => t.status === 'Completed').length
         return {
@@ -26,7 +26,7 @@ function useProgress() {
             completed: subjectCompleted,
             color: sub.color
         }
-    })
+    })]
 
     return {
         totalTasks,

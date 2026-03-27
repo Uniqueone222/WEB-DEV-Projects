@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { generateSummary, generateQuestions, generateFlashcards } from '../services/aiService'
+import { 
+FaRobot, FaFileAlt, FaQuestionCircle, FaLayerGroup} from "react-icons/fa";
 
 function AITools() {
     const [topic, setTopic] = useState('')
@@ -36,7 +38,7 @@ function AITools() {
 
     return (
         <div className="page ai-page">
-            <h2>🤖 AI Study Assistant</h2>
+            <h2><FaRobot className="mr-2" /> AI Study Assistant</h2>
 
             <div className="ai-input-section">
                 <input
@@ -49,13 +51,13 @@ function AITools() {
 
                 <div className="ai-buttons">
                     <button className="btn-primary" onClick={() => handleGenerate('summary')} disabled={loading}>
-                        📝 Summary
+                        <FaFileAlt className="mr-2" /> Summary
                     </button>
                     <button className="btn-primary" onClick={() => handleGenerate('questions')} disabled={loading}>
-                        ❓ Questions
+                        <FaQuestionCircle className="mr-2" /> Questions
                     </button>
                     <button className="btn-primary" onClick={() => handleGenerate('flashcards')} disabled={loading}>
-                        🃏 Flashcards
+                        <FaLayerGroup className="mr-2" /> Flashcards
                     </button>
                 </div>
             </div>
