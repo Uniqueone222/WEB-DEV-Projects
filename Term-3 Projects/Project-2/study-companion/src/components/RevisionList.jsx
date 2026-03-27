@@ -1,5 +1,5 @@
 import { formatDate } from '../utils/helpers'
-
+import {FaCalendar} from 'react-icons/fa'
 function RevisionList({ revisions, topics, onDelete }) {
 
     // match revision to its topic name
@@ -17,7 +17,7 @@ function RevisionList({ revisions, topics, onDelete }) {
             {revisions.map(rev => (
                 <div key={rev.id} className="revision-item">
                     <span className="revision-topic">{getTopicName(rev.topic)}</span>
-                    <span className="revision-date">📅 {formatDate(rev.date)}</span>
+                    <span className="revision-date"><FaCalendar/> {formatDate(rev.date)}</span>
                     <button className="btn-icon btn-delete" onClick={() => onDelete(rev.id)}>🗑️</button>
                 </div>
             ))}
