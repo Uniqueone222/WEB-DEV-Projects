@@ -31,6 +31,11 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   line-height: 1.5;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 h1,
@@ -52,6 +57,13 @@ button {
   font-family: inherit;
 }
 
+img,
+svg,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
 input,
 select,
 textarea {
@@ -67,6 +79,15 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .error {

@@ -373,6 +373,8 @@
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 0.5rem;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tab-btn {
@@ -381,6 +383,7 @@
   color: var(--text-muted);
   font-weight: 500;
   white-space: nowrap;
+  scroll-snap-align: start;
 }
 
 .tab-btn.active {
@@ -514,6 +517,81 @@
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .nav-brand {
+    font-size: 1rem;
+  }
+
+  .page-content {
+    padding: 1rem;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topics-list {
+    gap: 0.75rem;
+  }
+
+  .topic-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .topic-actions {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .task-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .task-status {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .task-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .filters-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar {
+    min-width: 0;
+  }
+
+  .ai-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .revision-layout {
     grid-template-columns: 1fr;
   }
@@ -523,7 +601,93 @@
   }
 
   .nav-links {
-    display: none;
-    /* In a real app, add a hamburger menu */
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .btn-primary {
+    width: 100%;
+    min-height: 40px;
+  }
+
+  .Toastify__toast-container {
+    width: min(92vw, 420px);
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    top: 1rem;
+    bottom: auto;
+  }
+
+  .Toastify__toast {
+    border-radius: var(--border-radius);
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0 0.75rem;
+  }
+
+  .nav-brand {
+    font-size: 0.95rem;
+  }
+
+  .nav-links {
+    gap: 0.75rem;
+  }
+
+  .page-content {
+    padding: 0.75rem;
+  }
+
+  .form-card,
+  .chart-box,
+  .subject-card,
+  .task-card,
+  .ai-input-section,
+  .ai-result,
+  .revision-list-section {
+    padding: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-card h3 {
+    font-size: 1.6rem;
+  }
+
+  .tabs {
+    gap: 0.4rem;
+  }
+
+  .tab-btn {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.9rem;
+  }
+
+  .topic-actions select,
+  .filters-row select,
+  .filters-row input {
+    width: 100%;
+  }
+
+  .ai-output {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .Toastify__toast-container {
+    width: min(94vw, 360px);
+    top: 0.75rem;
   }
 }
