@@ -6,13 +6,18 @@ import RevisionList from '../components/RevisionList'
 import { toast } from 'react-toastify'
 
 function Dashboard() {
-    const { topics, revisionSchedule, setRevisionSchedule } = useContext(StudyContext)
+    const { topics, revisionSchedule, setRevisionSchedule, tasks, setTasks } = useContext(StudyContext)
     const { totalTasks, completed, pending, revision, overdue, completionPercent, subjectProgress } = useProgress()
 
     // delete a revision
     function deleteRevision(id) {
+        const revision = revisionSchedule.find(r => r.id === id)
         setRevisionSchedule(revisionSchedule.filter(r => r.id !== id))
-        toast.info('Revision removed')
+
+        if (revision?.taskId) {
+            setTasks(tasks.map(t => t.id === revision.taskId ? { ...t, status: 'Completed' }: t))
+        }
+        toast.info('Revision Completed')
     }
     
     // get upcoming revisions (sorted by date)

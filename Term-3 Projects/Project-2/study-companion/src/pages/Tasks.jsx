@@ -8,6 +8,7 @@ import useTasks from '../hooks/useTasks'
 import TaskCard from '../components/TaskCard'
 import SearchBar from '../components/SearchBar'
 import { isOverdue } from '../utils/helpers'
+import { FaCheckCircle } from 'react-icons/fa'
 
 // form validation
 const taskSchema = yup.object({
@@ -125,7 +126,7 @@ function Tasks() {
     return (
         <div className="page tasks-page">
             <div className="page-header">
-                <h2>✅ Tasks</h2>
+                <h2><FaCheckCircle style={{ color: "green" }} />Tasks</h2>
                 <button className="btn-primary" onClick={() => setShowForm(!showForm)}>
                     {showForm ? 'Cancel' : '+ Add Task'}
                 </button>

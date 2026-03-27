@@ -1,4 +1,4 @@
-import { FaTrash, FaCheck, FaClock } from 'react-icons/fa'
+import { FaBook, FaTrash, FaClock, FaCheck, FaEdit, FaCalendar} from 'react-icons/fa'
 import { formatDate, isOverdue } from '../utils/helpers'
 import { useContext } from 'react'
 import { StudyContext } from '../context/StudyContext'
@@ -20,9 +20,9 @@ function TaskCard({ task, onToggle, onDelete, onMarkRevision }) {
             </div>
 
             <div className="task-details">
-                <span>📘 {subjectName}</span>
-                {task.topic && <span>📝 {topicName}</span>}
-                <span>📅 {formatDate(task.deadline)}</span>
+                <span><FaBook/> {subjectName}</span>
+                {task.topic && <span><FaEdit/> {topicName}</span>}
+                <span><FaCalendar /> {formatDate(task.deadline)}</span>
             </div>
 
             <div className="task-status">

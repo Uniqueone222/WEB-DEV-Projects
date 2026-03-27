@@ -3,7 +3,7 @@ import { StudyContext } from '../context/StudyContext'
 import { generateId } from '../utils/helpers'
 
 function useTasks() {
-    const { tasks, setTasks } = useContext(StudyContext)
+    const { tasks, setTasks, revisionSchedule, setRevisionSchedule } = useContext(StudyContext)
 
     // add a new task
     function addTask(taskData) {
@@ -41,9 +41,18 @@ function useTasks() {
             return { error: 'Complete the task before adding to revision' }
         }
         
+        const newRevision = {
+            id: generateId(),
+            topic: task.topic,
+            taskId: task.id,
+            date: task.deadline
+        }
+
         setTasks(tasks.map(t =>
             t.id === id ? { ...t, status: 'Revision' } : t
         ))
+
+        setRevisionSchedule([...revisionSchedule,newRevision])
     }
     
 
@@ -54,15 +63,16 @@ function useTasks() {
 
     // toggle task between Pending and Completed
     function toggleComplete(id) {
-        setTasks(tasks.map(task => {
-            if (task.id === id) {
-                return {
-                    ...task,
-                    status: task.status === 'Completed' ? 'Pending' : 'Completed'
-                }
-            }
-            return task
-        }))
+      const task = tasks.find((t) => t.id === id);
+
+      const updatedTasks = tasks.map(t =>
+        t.id === id ? { ...t, status: t.status === "Completed" ? "Pending" : "Completed" } : t);
+
+        setTasks(updatedTasks);
+
+        if (task?.status === "Revision") {
+            setRevisionSchedule(revisionSchedule.filter((r) => r.taskId !== task.id),);
+        }
     }
 
     return { tasks, addTask, updateTask, deleteTask, toggleComplete, markRevision }

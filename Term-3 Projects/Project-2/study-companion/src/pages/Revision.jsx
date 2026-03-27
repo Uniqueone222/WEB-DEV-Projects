@@ -9,7 +9,7 @@ import useSubjects from '../hooks/useSubjects'
 import useTasks from '../hooks/useTasks'
 
 function Revision() {
-    const { topics, subjects, revisionSchedule, setRevisionSchedule } = useContext(StudyContext)
+    const { topics, subjects, revisionSchedule, setRevisionSchedule, tasks, setTasks } = useContext(StudyContext)
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [selectedSubject, setSelectedSubject] = useState('')
     const [selectedTopic, setSelectedTopic] = useState('')
@@ -53,8 +53,13 @@ function Revision() {
 
     // delete a revision
     function deleteRevision(id) {
+        const revision = revisionSchedule.find(r => r.id === id)
         setRevisionSchedule(revisionSchedule.filter(r => r.id !== id))
-        toast.info('Revision removed')
+
+        if (revision?.taskId) {
+            setTasks(tasks.map(t => t.id === revision.taskId ? { ...t, status: 'Completed' }: t))
+        }
+        toast.info('Revision Completed')
     }
 
     // highlight dates that have revisions on the calendar
